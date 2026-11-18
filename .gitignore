@@ -1,0 +1,10 @@
+# APKs / decompiled sources (copyright Alfen) — not part of this repo
+*.apk
+*.xapk
+*.apkm
+
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.claude/

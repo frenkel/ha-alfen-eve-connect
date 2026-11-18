@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Alfen Eve charger",
+        "description": "Enter the local IP address of the charger and the login you also use in the MyEve app.",
+        "data": {
+          "host": "Host / IP address",
+          "username": "Username",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Login expired",
+        "data": { "password": "Password" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the charger.",
+      "invalid_auth": "Invalid username or password.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This charger is already configured.",
+      "reauth_successful": "Login updated."
+    }
+  },
+  "entity": {
+    "switch": {
+      "charging": { "name": "Charging" }
+    },
+    "select": {
+      "charging_mode": {
+        "name": "Charging mode",
+        "state": {
+          "normal": "Normal (max speed)",
+          "solar": "Solar only"
+        }
+      }
+    },
+    "sensor": {
+      "power": { "name": "Power" },
+      "energy": { "name": "Energy delivered" },
+      "max_current": { "name": "Max current" },
+      "green_share": { "name": "Green share" },
+      "main_state": { "name": "Status code" }
+    }
+  }
+}

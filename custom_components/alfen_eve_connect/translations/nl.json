@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Alfen Eve-laadpaal",
+        "description": "Vul het lokale IP-adres van de laadpaal in en de inlog die je ook in de MyEve-app gebruikt.",
+        "data": {
+          "host": "Host / IP-adres",
+          "username": "Gebruikersnaam",
+          "password": "Wachtwoord"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Inlog verlopen",
+        "data": { "password": "Wachtwoord" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan geen verbinding maken met de laadpaal.",
+      "invalid_auth": "Ongeldige gebruikersnaam of wachtwoord.",
+      "unknown": "Onverwachte fout."
+    },
+    "abort": {
+      "already_configured": "Deze laadpaal is al ingesteld.",
+      "reauth_successful": "Inlog bijgewerkt."
+    }
+  },
+  "entity": {
+    "switch": {
+      "charging": { "name": "Laden" }
+    },
+    "select": {
+      "charging_mode": {
+        "name": "Laadmodus",
+        "state": {
+          "normal": "Normaal (max snelheid)",
+          "solar": "Zonne-energie"
+        }
+      }
+    },
+    "sensor": {
+      "power": { "name": "Vermogen" },
+      "energy": { "name": "Geleverde energie" },
+      "max_current": { "name": "Maximale stroom" },
+      "green_share": { "name": "Groen aandeel" },
+      "main_state": { "name": "Statuscode" }
+    }
+  }
+}
