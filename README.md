@@ -8,13 +8,13 @@ De integratie gebruikt dezelfde lokale HTTPS-API als de officiële apps MyEve en
 | Entiteit | Wat het doet |
 |---|---|
 | **Laden** (schakelaar) | Uit = laden pauzeren, aan = laden hervatten. Werkt net als de pauzeknop in Eve Connect: de laadpaal krijgt een laadprofiel van 0 A. |
-| **Laadmodus** (keuzelijst) | **Normaal (max snelheid)**: zonneladen staat uit en het voertuig laadt op de ingestelde maximale stroom. **Zonne-energie**: modus *Green* met 100% groen aandeel. Het voertuig laadt dan alleen op overtollige zonnestroom, zonder de minimale 1,4 kW uit het net die *Comfort* zou gebruiken. |
+| **Laadmodus** (keuzelijst) | **Normaal (max snelheid)**: zonneladen staat uit en het voertuig laadt op de ingestelde maximale stroom. **Zonne-energie**: modus *Green* met 100% groen aandeel. Het voertuig laadt dan alleen op overtollige zonnestroom, zonder stroom uit het net. **Comfort (zon + minimaal vermogen)**: modus *Comfort*. Het voertuig laadt altijd minstens op het comfortniveau (zo nodig uit het net), en sneller als er meer zonnestroom over is. Het comfortniveau stel je in via de Alfen-app; je ziet het in de sensor **Comfortniveau**. |
 | **Voertuig aangesloten** (binaire sensor) | Aan zodra er een voertuig aan de laadpaal hangt, ook als die niet laadt. Handig voor automatiseringen, bijvoorbeeld om **Laden** weer aan te zetten als het voertuig wordt losgekoppeld. |
 | **Status** | De statuscode in gewone taal: *Geen voertuig aangesloten*, *Laden gestopt*, *Gepauzeerd* of *Laden*. Bij een andere code is de status onbekend; de ruwe waarde staat dan in **Statuscode**. |
 | Vermogen, Geleverde energie | Actueel laadvermogen en de totale meterstand. |
-| Maximale stroom, Groen aandeel, Statuscode | Diagnose-informatie. |
+| Maximale stroom, Groen aandeel, Comfortniveau, Statuscode | Diagnose-informatie. |
 
-Staat de laadpaal in een andere stand, bijvoorbeeld Comfort of een groen aandeel onder 100% ingesteld via de app? Dan toont de keuzelijst geen waarde, tot je zelf een stand kiest.
+Staat de laadpaal in een andere stand, bijvoorbeeld een groen aandeel onder 100% ingesteld via de app? Dan toont de keuzelijst geen waarde, tot je zelf een stand kiest.
 
 ## Installatie
 
@@ -53,3 +53,15 @@ De endpoints en property-ID's komen uit de apps MyEve 2.3.1 en Eve Connect 1.5.4
 Alle bevindingen staan in [docs/API.md](docs/API.md), inclusief boost, tijdschema en statuscodes. De volledige lijst met properties staat in [docs/properties.md](docs/properties.md).
 
 Dit project staat los van Alfen en is geen officieel product van Alfen.
+
+## Nieuwe versie uitbrengen
+
+HACS toont het versienummer van de nieuwste GitHub-release. Zo breng je een versie uit:
+
+1. Verhoog `version` in `custom_components/alfen_eve_connect/manifest.json`, bijvoorbeeld naar `0.3.0`.
+2. Commit en push.
+3. Maak een release met een tag die hetzelfde nummer heeft, met een `v` ervoor:
+
+   ```bash
+   gh release create v0.3.0 --generate-notes
+   ```

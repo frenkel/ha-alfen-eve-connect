@@ -22,6 +22,7 @@ from .const import (
     PROP_SOLAR_GREEN_SHARE,
     PROP_SOLAR_MODE,
     PROP_SOLAR_OVERRIDE_SOCKET1,
+    SOLAR_MODE_COMFORT,
     SOLAR_MODE_DISABLED,
     SOLAR_MODE_GREEN,
     USER_BOOST_PROFILE_ID,
@@ -201,6 +202,12 @@ class AlfenClient:
                 PROP_SOLAR_GREEN_SHARE: 100,
                 PROP_SOLAR_OVERRIDE_SOCKET1: 0,
             }
+        )
+
+    async def set_comfort(self) -> None:
+        """Comfort mode: always charge at the comfort level, faster on solar surplus."""
+        await self.set_properties(
+            {PROP_SOLAR_MODE: SOLAR_MODE_COMFORT, PROP_SOLAR_OVERRIDE_SOCKET1: 0}
         )
 
     async def set_normal(self) -> None:

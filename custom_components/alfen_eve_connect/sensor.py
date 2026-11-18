@@ -28,6 +28,7 @@ from .const import (
     PROP_MAIN_STATE,
     PROP_MAX_CURRENT,
     PROP_POWER,
+    PROP_SOLAR_COMFORT_LEVEL,
     PROP_SOLAR_GREEN_SHARE,
 )
 from .entity import AlfenEntity
@@ -90,6 +91,14 @@ SENSORS: tuple[AlfenSensorDescription, ...] = (
         prop_id=PROP_SOLAR_GREEN_SHARE,
         native_unit_of_measurement="%",
         entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+    AlfenSensorDescription(
+        key="comfort_level",
+        prop_id=PROP_SOLAR_COMFORT_LEVEL,
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        convert=lambda v: _round(v, 0),
     ),
     AlfenSensorDescription(
         key="main_state",

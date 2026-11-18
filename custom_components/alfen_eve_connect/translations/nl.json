@@ -37,7 +37,8 @@
         "name": "Laadmodus",
         "state": {
           "normal": "Normaal (max snelheid)",
-          "solar": "Zonne-energie"
+          "solar": "Zonne-energie",
+          "comfort": "Comfort (zon + minimaal vermogen)"
         }
       }
     },
@@ -54,6 +55,7 @@
       "power": { "name": "Vermogen" },
       "energy": { "name": "Geleverde energie" },
       "max_current": { "name": "Maximale stroom" },
+      "comfort_level": { "name": "Comfortniveau" },
       "green_share": { "name": "Groen aandeel" },
       "main_state": { "name": "Statuscode" }
     }

@@ -37,7 +37,8 @@
         "name": "Charging mode",
         "state": {
           "normal": "Normal (max speed)",
-          "solar": "Solar only"
+          "solar": "Solar only",
+          "comfort": "Comfort (solar + minimum power)"
         }
       }
     },
@@ -54,6 +55,7 @@
       "power": { "name": "Power" },
       "energy": { "name": "Energy delivered" },
       "max_current": { "name": "Max current" },
+      "comfort_level": { "name": "Comfort level" },
       "green_share": { "name": "Green share" },
       "main_state": { "name": "Status code" }
     }

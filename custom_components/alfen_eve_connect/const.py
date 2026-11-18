@@ -98,4 +98,5 @@ PAUSE_PROFILE_REQUEST = {
 # --- Charging mode select ------------------------------------------------------
 MODE_NORMAL = "normal"
 MODE_SOLAR = "solar"
-CHARGING_MODES = [MODE_NORMAL, MODE_SOLAR]
+MODE_COMFORT = "comfort"
+CHARGING_MODES = [MODE_NORMAL, MODE_SOLAR, MODE_COMFORT]

@@ -11,10 +11,12 @@ from . import AlfenConfigEntry
 from .api import AlfenError
 from .const import (
     CHARGING_MODES,
+    MODE_COMFORT,
     MODE_NORMAL,
     MODE_SOLAR,
     PROP_SOLAR_GREEN_SHARE,
     PROP_SOLAR_MODE,
+    SOLAR_MODE_COMFORT,
     SOLAR_MODE_DISABLED,
     SOLAR_MODE_GREEN,
 )
@@ -33,7 +35,10 @@ class AlfenChargingModeSelect(AlfenEntity, SelectEntity):
     """Normal = solar charging disabled (max speed).
 
     Solar = Green mode with 100% green share: only charges on solar surplus,
-    no 1.4 kW minimum from the grid (that is what Comfort mode would do).
+    no 1.4 kW minimum from the grid.
+
+    Comfort = always charges at the comfort level (from grid if needed) and
+    faster when there is more solar surplus.
     """
 
     _attr_icon = "mdi:solar-power-variant"
@@ -50,16 +55,20 @@ class AlfenChargingModeSelect(AlfenEntity, SelectEntity):
         mode = int(mode)
         if mode == SOLAR_MODE_DISABLED:
             return MODE_NORMAL
+        if mode == SOLAR_MODE_COMFORT:
+            return MODE_COMFORT
         share = self.prop(PROP_SOLAR_GREEN_SHARE)
         if mode == SOLAR_MODE_GREEN and share is not None and int(share) >= 100:
             return MODE_SOLAR
-        # Comfort mode or a lower green share was set elsewhere (e.g. the app).
+        # A green share below 100% was set elsewhere (e.g. the app).
         return None
 
     async def async_select_option(self, option: str) -> None:
         try:
             if option == MODE_SOLAR:
                 await self.coordinator.client.set_solar_only()
+            elif option == MODE_COMFORT:
+                await self.coordinator.client.set_comfort()
             else:
                 await self.coordinator.client.set_normal()
         except AlfenError as err:
