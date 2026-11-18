@@ -23,6 +23,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from . import AlfenConfigEntry
 from .const import (
+    MAIN_STATE_STATUS,
     PROP_ENERGY,
     PROP_MAIN_STATE,
     PROP_MAX_CURRENT,
@@ -30,6 +31,13 @@ from .const import (
     PROP_SOLAR_GREEN_SHARE,
 )
 from .entity import AlfenEntity
+
+
+def _status(value: Any) -> str | None:
+    try:
+        return MAIN_STATE_STATUS.get(int(value))
+    except (TypeError, ValueError):
+        return None
 
 
 def _round(value: Any, digits: int = 1) -> float | None:
@@ -62,6 +70,13 @@ SENSORS: tuple[AlfenSensorDescription, ...] = (
         suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
         convert=lambda v: _round(v, 0),
+    ),
+    AlfenSensorDescription(
+        key="status",
+        prop_id=PROP_MAIN_STATE,
+        device_class=SensorDeviceClass.ENUM,
+        options=list(MAIN_STATE_STATUS.values()),
+        convert=_status,
     ),
     AlfenSensorDescription(
         key="max_current",

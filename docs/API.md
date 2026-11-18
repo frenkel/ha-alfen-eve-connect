@@ -54,7 +54,7 @@ Hoe de modi werken, volgens de teksten in de apps:
 
 - **Green, groen aandeel 100%:** laadt alleen als er minstens 1,4 kW zonne-overschot is. Dit is de stand **Zonne-energie** in de integratie.
 - **Green, groen aandeel 0%:** laadt altijd minimaal op 1,4 kW.
-- **Comfort:** laadt altijd op het comfortniveau. Is er meer zonne-overschot, dan laadt de auto sneller.
+- **Comfort:** laadt altijd op het comfortniveau. Is er meer zonne-overschot, dan laadt het voertuig sneller.
 
 Zonneladen is alleen beschikbaar als aan al deze voorwaarden is voldaan (MyEve, `isSolarChargingAvailable`):
 
@@ -153,6 +153,17 @@ Zo werkt het schema:
 
 ## Statuscodes `2501_1` (Socket 1 – Mainstate)
 
+Gemeten op een echte laadpaal (Alfen Eve, november 2026):
+
+| Code | Situatie |
+|---|---|
+| 2 | Geen voertuig aangesloten |
+| 11 | Voertuig aangesloten, laden gestopt door het voertuig. Komt overeen met "Charging Stopped" uit de app. |
+| 12 | Laden gepauzeerd door het pauzeprofiel van 0 A. Komt overeen met "Waiting for power" uit de app. |
+| 14 | Voertuig laadt |
+
+Let op: **16** ("Vehicle not Connected") betekent dus *niet* dat de stekker eruit is; dat is 2. De integratie gebruikt 2 voor de sensor *Voertuig aangesloten*, en alleen deze vier codes voor de sensor *Status*.
+
 Teksten uit MyEve (`MainStateDescriptors`). Niet alle codes hebben een tekst in de app. De lijst is mogelijk niet compleet.
 
 | Code | Tekst |
@@ -188,7 +199,7 @@ Teksten uit MyEve (`MainStateDescriptors`). Niet alle codes hebben een tekst in 
 | 47–52 | Schuko-statussen |
 | 53 | Invalid Card |
 
-Let op: de app-teksten kunnen bij een andere nummering horen (hex of decimaal). Controleer dit tegen een echte laadpaal.
+De app heeft geen tekst voor de gewone toestanden 2 (geen voertuig) en 14 (laden). Codes 11 en 12 zijn gecontroleerd; de overige teksten niet.
 
 ## Overige nuttige properties
 

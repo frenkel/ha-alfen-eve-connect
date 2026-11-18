@@ -12,7 +12,7 @@ from homeassistant.helpers.aiohttp_client import async_create_clientsession
 from .api import AlfenClient
 from .coordinator import AlfenCoordinator
 
-PLATFORMS = [Platform.SELECT, Platform.SENSOR, Platform.SWITCH]
+PLATFORMS = [Platform.BINARY_SENSOR, Platform.SELECT, Platform.SENSOR, Platform.SWITCH]
 
 type AlfenConfigEntry = ConfigEntry[AlfenCoordinator]
 

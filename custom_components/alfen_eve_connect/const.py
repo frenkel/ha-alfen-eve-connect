@@ -49,6 +49,18 @@ POLLED_PROPERTIES = [
     PROP_SOLAR_OVERRIDE_SOCKET1,
 ]
 
+# Main state (2501_1) values measured on a real charger.
+MAIN_STATE_NO_VEHICLE = 2  # Nothing plugged in
+
+# Human-readable status for the main states verified on a real charger.
+# Other codes are left unmapped (the Status sensor shows unknown).
+MAIN_STATE_STATUS = {
+    MAIN_STATE_NO_VEHICLE: "no_vehicle",
+    11: "charging_stopped",
+    12: "paused",
+    14: "charging",
+}
+
 SOLAR_MODE_DISABLED = 0
 SOLAR_MODE_COMFORT = 1
 SOLAR_MODE_GREEN = 2

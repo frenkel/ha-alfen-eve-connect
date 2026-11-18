@@ -8,7 +8,9 @@ De integratie gebruikt dezelfde lokale HTTPS-API als de officiële apps MyEve en
 | Entiteit | Wat het doet |
 |---|---|
 | **Laden** (schakelaar) | Uit = laden pauzeren, aan = laden hervatten. Werkt net als de pauzeknop in Eve Connect: de laadpaal krijgt een laadprofiel van 0 A. |
-| **Laadmodus** (keuzelijst) | **Normaal (max snelheid)**: zonneladen staat uit en de auto laadt op de ingestelde maximale stroom. **Zonne-energie**: modus *Green* met 100% groen aandeel. De auto laadt dan alleen op overtollige zonnestroom, zonder de minimale 1,4 kW uit het net die *Comfort* zou gebruiken. |
+| **Laadmodus** (keuzelijst) | **Normaal (max snelheid)**: zonneladen staat uit en het voertuig laadt op de ingestelde maximale stroom. **Zonne-energie**: modus *Green* met 100% groen aandeel. Het voertuig laadt dan alleen op overtollige zonnestroom, zonder de minimale 1,4 kW uit het net die *Comfort* zou gebruiken. |
+| **Voertuig aangesloten** (binaire sensor) | Aan zodra er een voertuig aan de laadpaal hangt, ook als die niet laadt. Handig voor automatiseringen, bijvoorbeeld om **Laden** weer aan te zetten als het voertuig wordt losgekoppeld. |
+| **Status** | De statuscode in gewone taal: *Geen voertuig aangesloten*, *Laden gestopt*, *Gepauzeerd* of *Laden*. Bij een andere code is de status onbekend; de ruwe waarde staat dan in **Statuscode**. |
 | Vermogen, Geleverde energie | Actueel laadvermogen en de totale meterstand. |
 | Maximale stroom, Groen aandeel, Statuscode | Diagnose-informatie. |
 

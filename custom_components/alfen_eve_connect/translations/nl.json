@@ -26,6 +26,9 @@
     }
   },
   "entity": {
+    "binary_sensor": {
+      "vehicle_connected": { "name": "Voertuig aangesloten" }
+    },
     "switch": {
       "charging": { "name": "Laden" }
     },
@@ -39,6 +42,15 @@
       }
     },
     "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "no_vehicle": "Geen voertuig aangesloten",
+          "charging_stopped": "Laden gestopt",
+          "paused": "Gepauzeerd",
+          "charging": "Laden"
+        }
+      },
       "power": { "name": "Vermogen" },
       "energy": { "name": "Geleverde energie" },
       "max_current": { "name": "Maximale stroom" },

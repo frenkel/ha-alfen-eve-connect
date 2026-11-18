@@ -26,6 +26,9 @@
     }
   },
   "entity": {
+    "binary_sensor": {
+      "vehicle_connected": { "name": "Vehicle connected" }
+    },
     "switch": {
       "charging": { "name": "Charging" }
     },
@@ -39,6 +42,15 @@
       }
     },
     "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "no_vehicle": "No vehicle connected",
+          "charging_stopped": "Charging stopped",
+          "paused": "Paused",
+          "charging": "Charging"
+        }
+      },
       "power": { "name": "Power" },
       "energy": { "name": "Energy delivered" },
       "max_current": { "name": "Max current" },
