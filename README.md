@@ -16,6 +16,15 @@ Staat de laadpaal in een andere stand, bijvoorbeeld Comfort of een groen aandeel
 
 ## Installatie
 
+### Via HACS (aanbevolen)
+
+1. Open in Home Assistant **HACS**, klik rechtsboven op de drie puntjes en kies **Custom repositories**.
+2. Plak `https://github.com/frenkel/ha-alfen-eve-connect`, kies type **Integration** en klik op **Add**.
+3. Zoek in HACS op **Alfen Eve Connect**, klik op **Download** en herstart Home Assistant.
+4. Ga verder bij stap 3 hieronder.
+
+### Handmatig
+
 1. Kopieer de map `custom_components/alfen_eve_connect` naar de map `config/custom_components/` van je Home Assistant. Gebruik daarvoor bijvoorbeeld de add-on *File editor* of *Samba share*.
 2. Herstart Home Assistant.
 3. Ga naar **Instellingen → Apparaten & diensten → Integratie toevoegen** en zoek op **Alfen Eve Connect**.
