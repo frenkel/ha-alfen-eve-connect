@@ -36,6 +36,7 @@ PROP_SOLAR_MODE = "3280_1"  # Solar - Operation Mode (0 disabled, 1 comfort, 2 g
 PROP_SOLAR_GREEN_SHARE = "3280_2"  # Solar - Green Share (%)
 PROP_SOLAR_COMFORT_LEVEL = "3280_3"  # Solar - Comfort Level (W)
 PROP_SOLAR_OVERRIDE_SOCKET1 = "3280_4"  # Solar - Override Socket 1 (boost)
+PROP_MAX_PHASES = "312E_0"  # Socket 1 - Max phases
 
 POLLED_PROPERTIES = [
     PROP_MAX_CURRENT,
@@ -47,6 +48,7 @@ POLLED_PROPERTIES = [
     PROP_SOLAR_GREEN_SHARE,
     PROP_SOLAR_COMFORT_LEVEL,
     PROP_SOLAR_OVERRIDE_SOCKET1,
+    PROP_MAX_PHASES,
 ]
 
 # Main state (2501_1) values measured on a real charger.
@@ -64,6 +66,17 @@ MAIN_STATE_STATUS = {
 SOLAR_MODE_DISABLED = 0
 SOLAR_MODE_COMFORT = 1
 SOLAR_MODE_GREEN = 2
+
+# Lowest comfort level (3280_3): the minimum charging current of 6 A on every
+# phase (below 6 A a vehicle stops charging). 1380 W on a single-phase charger,
+# which Eve Connect shows as "Min. 1.4 kW"; 4140 W on three phases.
+MIN_CHARGE_CURRENT = 6
+NOMINAL_PHASE_VOLTAGE = 230
+
+
+def comfort_level_min(phases: int) -> int:
+    """Lowest comfort level in W for a charger with this many phases."""
+    return MIN_CHARGE_CURRENT * NOMINAL_PHASE_VOLTAGE * phases
 
 # --- Charging profiles (identical to Eve Connect) -----------------------------
 # Profile IDs are uint32 on the charger; the apps use the signed form in the

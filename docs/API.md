@@ -45,14 +45,14 @@ Beide apps zijn React Native-apps met Hermes-bytecode (versie 96). Gedecompileer
 |---|---|---|
 | `SolarChargingMode` | `3280_1` | 0 = Uit, 1 = Comfort, 2 = Green |
 | `SolarGreenShare` | `3280_2` | % (0–100) |
-| `SolarComfortLevel` | `3280_3` | W (minimaal 2500) |
+| `SolarComfortLevel` | `3280_3` | W. Minimaal 6 A per fase: 1380 W bij één fase (Eve Connect toont "1.4 kW"), 4140 W bij drie fasen. |
 | `SolarOverrideSocket1` | `3280_4` | 0/1, boost-override socket 1 |
 | – | `3280_5` | 0/1, boost-override socket 2 |
 | – | `3278_1` / `3278_2` | Override Charging Profile socket 1/2. MyEve-boost zet hier 4294967295 (MAX_UINT32) in. |
 
 Hoe de modi werken, volgens de teksten in de apps:
 
-- **Green, groen aandeel 100%:** laadt alleen als er minstens 1,4 kW zonne-overschot is. Dit is de stand **Zonne-energie** in de integratie.
+- **Green, groen aandeel 100%:** laadt alleen als er minstens 1,4 kW zonne-overschot is. Dit is de stand **Zonne-energie Groen** in de integratie.
 - **Green, groen aandeel 0%:** laadt altijd minimaal op 1,4 kW.
 - **Comfort:** laadt altijd op het comfortniveau. Is er meer zonne-overschot, dan laadt het voertuig sneller.
 
@@ -77,7 +77,7 @@ Elk profiel is een OCPP-achtig `csChargingProfiles` met `connectorId: 0` en `cha
 | `USER_PROFILE_MONDAY` … `SUNDAY` | 234202401 … 234202407 | idem |
 | `USER_PROFILE_APPLYSCHEDULE` | 234202408 | idem |
 
-Andere constanten: `NOMINAL_PHASE_VOLTAGE` = 230, `MIN_CHARGE_CURRENT` = 6 A, `DEFAULT_NUMBER_OF_PHASES` = 3, `MIN_POWER_PER_PHASE` = 1,4 kW, `MAX_POSSIBLE_POWER` = 22,1 kW, `MIN_COMFORT_LEVEL` = 2500 W, `ACTIVE_PHASE_VOLTAGE_THRESHOLD` = 80 V, `BOOST_ACTIVE_PERIOD` = 10800 s.
+Andere constanten: `NOMINAL_PHASE_VOLTAGE` = 230, `MIN_CHARGE_CURRENT` = 6 A, `DEFAULT_NUMBER_OF_PHASES` = 3, `MIN_POWER_PER_PHASE` = 1,4 kW, `MAX_POSSIBLE_POWER` = 22,1 kW, `MIN_COMFORT_LEVEL` = 2500 W (staat in de app-code, maar wordt in de praktijk niet gebruikt: het minimum is 6 A per fase), `ACTIVE_PHASE_VOLTAGE_THRESHOLD` = 80 V, `BOOST_ACTIVE_PERIOD` = 10800 s.
 
 ### Pauzeren (laden stoppen)
 
@@ -211,6 +211,7 @@ De app heeft geen tekst voor de gewone toestanden 2 (geen voertuig) en 14 (laden
 | `2221_22` | Socket 1 – Energy Delivered Sum. Demo-data 62100, dus waarschijnlijk Wh. |
 | `2221_3..5` | Spanning L1–L3 (V) |
 | `2221_A..C` | Stroom L1–L3 (A) |
+| `312E_0` | Socket 1 – Max phases. De integratie berekent hiermee het minimale comfortniveau. |
 | `2126_0` | Authorization mode |
 | `2185_0` | Allow 1- and 3-phased charging (`PhaseSwitchingEnabled`) |
 | `2600_0` | Auto Charge – Enabled |

@@ -37,8 +37,8 @@
         "name": "Charging mode",
         "state": {
           "normal": "Normal (max speed)",
-          "solar": "Solar only",
-          "comfort": "Comfort (solar + minimum power)"
+          "solar": "Solar Green",
+          "comfort": "Solar Comfort"
         }
       }
     },

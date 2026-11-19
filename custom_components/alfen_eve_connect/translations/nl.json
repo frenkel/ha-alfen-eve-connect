@@ -37,8 +37,8 @@
         "name": "Laadmodus",
         "state": {
           "normal": "Normaal (max snelheid)",
-          "solar": "Zonne-energie",
-          "comfort": "Comfort (zon + minimaal vermogen)"
+          "solar": "Zonne-energie Groen",
+          "comfort": "Zonne-energie Comfort"
         }
       }
     },

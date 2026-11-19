@@ -14,6 +14,7 @@ from .const import (
     MODE_COMFORT,
     MODE_NORMAL,
     MODE_SOLAR,
+    PROP_MAX_PHASES,
     PROP_SOLAR_GREEN_SHARE,
     PROP_SOLAR_MODE,
     SOLAR_MODE_COMFORT,
@@ -37,8 +38,9 @@ class AlfenChargingModeSelect(AlfenEntity, SelectEntity):
     Solar = Green mode with 100% green share: only charges on solar surplus,
     no 1.4 kW minimum from the grid.
 
-    Comfort = always charges at the comfort level (from grid if needed) and
-    faster when there is more solar surplus.
+    Comfort = Comfort mode with the comfort level at its minimum (6 A per phase):
+    always charges at least that (from grid if needed), faster on more solar
+    surplus.
     """
 
     _attr_icon = "mdi:solar-power-variant"
@@ -63,12 +65,19 @@ class AlfenChargingModeSelect(AlfenEntity, SelectEntity):
         # A green share below 100% was set elsewhere (e.g. the app).
         return None
 
+    def _phases(self) -> int:
+        """Phases of the socket; 1 if unknown (the lowest level, never too much)."""
+        try:
+            return max(1, int(self.prop(PROP_MAX_PHASES)))
+        except (TypeError, ValueError):
+            return 1
+
     async def async_select_option(self, option: str) -> None:
         try:
             if option == MODE_SOLAR:
                 await self.coordinator.client.set_solar_only()
             elif option == MODE_COMFORT:
-                await self.coordinator.client.set_comfort()
+                await self.coordinator.client.set_comfort(self._phases())
             else:
                 await self.coordinator.client.set_normal()
         except AlfenError as err:
